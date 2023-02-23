@@ -1,4 +1,4 @@
-package com.asterix.weatherapp.client.handler;
+package com.asterix.weatherapp.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,8 +14,8 @@ import org.json.simple.JSONValue;
 import com.asterix.weatherapp.dto.Location;
 import com.google.gson.Gson;
 
-public class WeatherApiHandler {
-    public void readJson(){
+public class ParseJson {
+    public void loadJson(){
         ClassLoader loader = getClass().getClassLoader();
         URL resource = loader.getResource("json/weather.json");
         
@@ -39,11 +39,5 @@ public class WeatherApiHandler {
         JSONObject location = (JSONObject) object1.get("location");
         Location loc = new Gson().fromJson(location.toString(),Location.class);
         System.out.println(loc);
-    }
-
-    public static void main(String[] args) {
-        WeatherApiHandler handler = new WeatherApiHandler();
-
-        handler.readJson();
     }
 }

@@ -24,3 +24,6 @@ spring:
       enabled: true
 server:
   port: 6657
+weather: 
+  key: 312a6c240cdf400981f181909232202
+  url: http://api.weatherapi.com/v1/
