@@ -1,0 +1,26 @@
+spring:
+  main:
+    #web-application-type: NONE
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://172.17.0.2:3306/dockerdb
+    username: dockerdb
+    password: dwai1996
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+server:
+  port: 6657

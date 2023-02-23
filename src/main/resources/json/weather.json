@@ -1,0 +1,12 @@
+{
+    "location": {
+        "name": "London",
+        "region" : "Europe",
+        "country" : "UK"
+    },
+    "climate": {
+        "temp": "10",
+        "temp_min": "1",
+        "temp_max": "20"
+    }
+}
