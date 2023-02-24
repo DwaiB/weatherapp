@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <script >
+        document.getElementById("area").innerHTML = document.getElementById("search").innerHTML;
+        function search(){
+            document.getElementById("area").innerHTML = null;
+            document.getElementById("area").innerHTML = document.getElementById("search").innerHTML;
+        }
+        function forecast(){
+            document.getElementById("area").innerHTML = null;
+            document.getElementById("area").innerHTML = document.getElementById("forecast").innerHTML;
+        }
+        function current(){
+            document.getElementById("area").innerHTML = null;
+            document.getElementById("area").innerHTML = document.getElementById("current").innerHTML;
+        }
+        function history(){
+            document.getElementById("area").innerHTML = null;
+            document.getElementById("area").innerHTML = document.getElementById("history").innerHTML;
+        }
+        </script>
+    <style>
+        body {
+            background-color: rgb(220, 236, 238) ;
+        }
+        ul {
+            list-style-type: none;
+            overflow: hidden;
+            margin-left: 0;
+            
+        }
+
+        li {
+            list-style-type: none;
+            padding: 10px;
+            background-color: aliceblue;
+            float: left;
+            
+        }
+        li:hover {
+            background-color: rgb(182, 195, 207);
+        }
+        li span {
+            
+            display: flexbox;
+        }
+
+        #dashboard {
+            margin-top: 10%;
+            margin-left: 20%;
+            margin-right: 20%;
+            box-shadow: 5px 15px rgb(208, 231, 233) ;
+            padding: 80px;
+            background-color: rgb(208, 231, 233) ;
+            
+        }
+        #dashboard:hover {
+            box-shadow: 5px 10px rgb(172, 199, 202) ;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>Weather APP</div>
+    <br>
+    <div id="dashboard">
+        <ul>
+            <li>
+                <span  onclick="search()">Search</span><br>
+            </li>
+            <li>
+                <span  onclick="forecast()">Forecast</span><br>
+            </li>
+            <li>
+                <span  onclick="current()">Current</span><br>
+            </li>
+            <li>
+                <span onclick="history()">History</span><br>
+            </li>
+        </ul>
+        <div id="area">
+            <div id="search">
+                <form th:action="@{/weather/locations}">
+                    <label>City: </label>
+                    <input type="text" th:name="city" /><br>
+                    <input type="submit" value="Get Response">
+                </form>
+            </div>
+        </div>
+        <div id="search" style="display: none">
+            <form th:action="@{/weather/locations}">
+                <label>City: </label>
+                <input type="text" th:name="city" /><br>
+                <input type="submit" value="Get Response">
+            </form>
+        </div>
+        <div id="forecast" style="display: none">
+            <form th:action="@{/weather/locations}">
+                <label>City: </label>
+                <input type="text" th:name="city" /><br>
+                <label>Days: </label>
+                <select th:name="days" >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select><br>
+                <input type="submit" value="Get Response">
+            </form>
+        </div>
+        <div id="current" style="display: none">
+            <form th:action="@{/weather/locations}">
+                <i<label>City: </label>
+                <input type="text" th:name="city" /><br>
+                <label>Date(yyyy-mm-DD): </label>
+                <input type="text" th:name="date" /><br>
+                <input type="submit" value="Get Response">
+            </form>
+        </div>
+        <div id="history" style="display: none">
+            <form th:action="@{/weather/locations}">
+                <label>City: </label>
+                <input type="text" th:name="city" /><br>
+                <label>Date(yyyy-mm-DD): </label>
+                <input type="text" th:name="date" /><br>
+                <input type="submit" value="Get Response">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

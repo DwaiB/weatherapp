@@ -1,5 +1,8 @@
 package com.asterix.weatherapp.client;
 
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -10,13 +13,18 @@ public class WeatherApi {
     
     @Value("${weather.key}")
     private String key;
-    @Value("${weather.url")
+    @Value("${weather.url}")
     private String uri;
+    @Autowired
+    public WeatherApi(){
+        System.out.println(uri+" hi"+ key);
+    }
     public WeatherApi(String key,String uri){
         this.key = key;
         this.uri = uri;
     }
     public String search(String city){
+        System.out.println(uri+" hi"+ key);
         String url = UriComponentsBuilder.fromUriString(uri).path("search.json").queryParam("key", key).queryParam("q", city).queryParam("aqi", "no")
         .queryParam("alerts", "no").build().toUriString();
         RestTemplate template = new RestTemplate();

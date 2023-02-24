@@ -1,11 +1,38 @@
 package com.asterix.weatherapp.controller;
-// @RestController
-// public class WeatherController {
-//     @RequestMapping(value = "/weatherapi", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//     public ResponseEntity<String> get(){
-//         WeatherApi api = new WeatherApi();
-        
-		
-//         return new ResponseEntity<>(result,HttpStatus.OK);
-//     }
-// }
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.asterix.weatherapp.helper.OnSearch;
+import com.asterix.weatherapp.services.WeatherService;
+
+
+@RestController
+@RequestMapping("/weather")
+public class WeatherController {
+
+    @Autowired
+    private WeatherService service;
+
+    @RequestMapping("/")
+    public ModelAndView dashboard(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("dashboard");
+        view.addObject("query", "");
+        return view;
+    }
+
+    @RequestMapping("/locations")
+    public ModelAndView searchResult(@RequestParam(value = "city") String city){
+        System.out.println("City "+city);
+       ModelAndView view = new ModelAndView();
+        view.setViewName("locations");
+        OnSearch result = service.search(city);
+        view.addObject("locations", result);
+       return view;
+    }
+}

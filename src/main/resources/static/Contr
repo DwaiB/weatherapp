@@ -1,0 +1,105 @@
+package com.yumikanez.controller;
+
+import java.net.URI;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
+import com.yumikanez.model.Book;
+import com.yumikanez.server.main.exception.BookNotFoundException;
+import com.yumikanez.service.BookService;
+
+
+
+@RestController
+public class BookController {
+
+	@Autowired
+	private BookService service;
+	
+	
+	@GetMapping("/booklist")
+	public List<Book> bookList(){
+		return service.getAllBooks();
+	}
+	@Cacheable(value="books")
+	@GetMapping("/")
+	private ModelAndView getAllBooks() {
+		List<Book> booklist = service.getAllBooks();
+		ModelAndView view = new ModelAndView();
+		view.setViewName("dashboard");
+		view.addObject("booklist", booklist);
+		return view;
+	}
+
+	@RequestMapping("/addbook")
+	private ModelAndView addBook() {
+		Book book = new Book();
+		ModelAndView view = new ModelAndView();
+		view.setViewName("add-book");
+		view.addObject("book", book);
+		return view;
+	}
+	@CrossOrigin
+	@GetMapping("/books")
+	private CollectionModel<Book> getBooks() {
+		service.getAllBooks();
+		List<Book> books = service.getAllBooks();
+		
+		Link linkTo = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).bookList()).withRel("all-books");
+		
+		CollectionModel<Book> result = CollectionModel.of(books,linkTo);
+		return result;
+	}
+	
+	@GetMapping("/book/{id}")
+	private Book getTheBook(@PathVariable("id") String id) {
+		Book book = service.getBookById(id);
+		if(book == null ) {
+			throw new BookNotFoundException("id: "+id);
+		}
+		return book;
+	}
+
+	@GetMapping("/updatebook/{id}")
+	private ModelAndView getBook(@PathVariable("id") String id) {
+		Book book = service.getBookById(id);
+		ModelAndView view = new ModelAndView();
+		view.addObject("book", book);
+		view.setViewName("update-book");
+		return view;
+	}
+
+	@PostMapping("/book")
+	private ResponseEntity<Object> saveBook(Book book) {
+		service.saveOrUpdate(book);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(URI.create("/"));
+		return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+	}
+
+	@RequestMapping("/deletebook/{id}")
+	private RedirectView deleteBook(@PathVariable("id") String id) {
+		System.out.println("Delete Called" + id);
+		service.delete(id);
+		RedirectView view = new RedirectView();
+		view.setContextRelative(true);
+		view.setUrl("/");
+		return view;
+	}
+}
