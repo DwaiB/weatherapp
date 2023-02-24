@@ -1,5 +1,6 @@
 package com.asterix.weatherapp.dto.ForcastDay;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ForecastDay {
@@ -9,11 +10,11 @@ public class ForecastDay {
     private List<Hour> hour;
     
     public ForecastDay(){}
-    public ForecastDay(String date, Day day, Astro astro, List<Hour> hour) {
+    public ForecastDay(String date, Day day, Astro astro, Hour [] hour) {
         this.date = date;
         this.day = day;
         this.astro = astro;
-        this.hour = hour;
+        this.hour = Arrays.asList(hour);
     }
     public String getDate() {
         return date;

@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 public class WeatherApiTest {
     @Test
     void testCurrent() {
-        WeatherApi api = new WeatherApi();
-        System.out.println(api.current("London"));
     }
 
     @Test

@@ -1,6 +1,5 @@
 package com.asterix.weatherapp.dto.ForcastDay;
 
-import ch.qos.logback.core.joran.conditional.Condition;
 
 public class Hour {
     private String time;
@@ -8,20 +7,19 @@ public class Hour {
     private Condition condition;
     private Integer humidity;
     private Integer cloud;
-    private Integer feelslike_c;
-    private Integer feelslike_f;
+    private Double feelslike_c;
 
     public Hour(){}
 
-    public Hour(String time, Integer is_day, Condition condition, Integer humidity, Integer cloud, Integer feelslike_c,
-            Integer feelslike_f) {
+    
+
+    public Hour(String time, Integer is_day, Condition condition, Integer humidity, Integer cloud, Double feelslike_c) {
         this.time = time;
         this.is_day = is_day;
         this.condition = condition;
         this.humidity = humidity;
         this.cloud = cloud;
         this.feelslike_c = feelslike_c;
-        this.feelslike_f = feelslike_f;
     }
 
     public String getTime() {
@@ -64,21 +62,58 @@ public class Hour {
         this.cloud = cloud;
     }
 
-    public Integer getFeelslike_c() {
+    public Double getFeelslike_c() {
         return feelslike_c;
     }
 
-    public void setFeelslike_c(Integer feelslike_c) {
+    public void setFeelslike_c(Double feelslike_c) {
         this.feelslike_c = feelslike_c;
     }
 
-    public Integer getFeelslike_f() {
-        return feelslike_f;
-    }
 
-    public void setFeelslike_f(Integer feelslike_f) {
-        this.feelslike_f = feelslike_f;
-    }
 
+    public class Condition {
+        private String text;
+        private String icon;
+        private Integer code;
     
+        public Condition(){}
+    
+        public Condition(String text, String icon, Integer code) {
+            this.text = text;
+            this.icon = icon;
+            this.code = code;
+        }
+    
+        public String getText() {
+            return text;
+        }
+    
+        public void setText(String text) {
+            this.text = text;
+        }
+    
+        public String getIcon() {
+            return icon;
+        }
+    
+        public void setIcon(String icon) {
+            this.icon = icon;
+        }
+    
+        public Integer getCode() {
+            return code;
+        }
+    
+        public void setCode(Integer code) {
+            this.code = code;
+        }
+    
+        @Override
+        public String toString() {
+            return "condition:{\n\ttext : "+text+"\n\ticon : "+icon+"\n\tcode : "+code+"}";
+        }
+        
+        
+    }
 }

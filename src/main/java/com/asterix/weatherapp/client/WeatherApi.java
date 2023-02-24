@@ -12,7 +12,10 @@ public class WeatherApi {
     private String key;
     @Value("${weather.url")
     private String uri;
-    
+    public WeatherApi(String key,String uri){
+        this.key = key;
+        this.uri = uri;
+    }
     public String search(String city){
         String url = UriComponentsBuilder.fromUriString(uri).path("search.json").queryParam("key", key).queryParam("q", city).queryParam("aqi", "no")
         .queryParam("alerts", "no").build().toUriString();

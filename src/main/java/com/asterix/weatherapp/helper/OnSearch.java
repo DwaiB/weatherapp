@@ -7,7 +7,7 @@ import com.asterix.weatherapp.dto.Location;
 public class OnSearch {
     private List<Location> location;
     public OnSearch() {}
-    public OnSearch(String json) {
+    public OnSearch(Location[] locations) {
         // TODO: handle Search json
     }
     public List<Location> getLocation() {
