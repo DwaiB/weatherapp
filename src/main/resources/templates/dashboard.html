@@ -99,7 +99,7 @@
             </form>
         </div>
         <div id="forecast" style="display: none">
-            <form th:action="@{/weather/locations}">
+            <form th:action="@{/weather/forecast}">
                 <label>City: </label>
                 <input type="text" th:name="city" /><br>
                 <label>Days: </label>
@@ -112,7 +112,7 @@
             </form>
         </div>
         <div id="current" style="display: none">
-            <form th:action="@{/weather/locations}">
+            <form th:action="@{/weather/current}">
                 <i<label>City: </label>
                 <input type="text" th:name="city" /><br>
                 <label>Date(yyyy-mm-DD): </label>
@@ -121,7 +121,7 @@
             </form>
         </div>
         <div id="history" style="display: none">
-            <form th:action="@{/weather/locations}">
+            <form th:action="@{/weather/history}">
                 <label>City: </label>
                 <input type="text" th:name="city" /><br>
                 <label>Date(yyyy-mm-DD): </label>

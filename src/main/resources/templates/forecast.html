@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <title>Locations</title>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>City</th>
+                    <th>Region</th>
+                    <th>Country</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each = "loc : ${forecast.location}">
+                    <td th:text ="${loc.name}"></td>
+                    <td th:text = "${loc.region}"></td>
+                    <td th:text = "${loc.country}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div th:each = "current : ${forecast.current}">
+            <p>Temp : <span th:text = "${current.temp_c}"></span></p>
+
+        </div>
+        <div th:each = "fore : ${forecast.forecast}">
+            <div th:each = "fday : ${fore.forecastday}">
+                <p>Date : <span th:text = "${fday.date}"></span></p>
+                <div th:each = "day : ${fday.day}">
+                    <p>Avg Humidity : <span th:text = "${day.avghumidity}"></span></p>
+                    <div th:each = "condition : ${day.condition}">
+                        <p>Condition : <span th:text = "${condition.text}"></span></p>
+                    </div>
+                </div>
+                <br>
+                <div th:each = "astro : ${fday.astro}">
+                    <p>Sunrise : <span th:text = "${astro.sunrise}"></span></p>
+                    <p>Sunset : <span th:text = "${astro.sunset}"></span></p>
+                </div>
+                <br>
+                <div th:each = "hour : ${fday.hour}">
+                    <p>Hour : <span th:text = "${hour.time}"></span></p>
+                    <p>Feel like : <span th:text = "${hour.feelslike_c}"></span></p>
+                    <div th:each = "condition : ${hour.condition}">
+                        <p>Condition : <span th:text = "${condition.text}"></span></p>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
