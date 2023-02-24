@@ -5,7 +5,7 @@ public class Hour {
     private String time;
     private Integer is_day;
     private Condition condition;
-    private Integer humidity;
+    private Double humidity;
     private Integer cloud;
     private Double feelslike_c;
 
@@ -13,7 +13,7 @@ public class Hour {
 
     
 
-    public Hour(String time, Integer is_day, Condition condition, Integer humidity, Integer cloud, Double feelslike_c) {
+    public Hour(String time, Integer is_day, Condition condition, Double humidity, Integer cloud, Double feelslike_c) {
         this.time = time;
         this.is_day = is_day;
         this.condition = condition;
@@ -46,11 +46,11 @@ public class Hour {
         this.condition = condition;
     }
 
-    public Integer getHumidity() {
+    public Double getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(Integer humidity) {
+    public void setHumidity(Double humidity) {
         this.humidity = humidity;
     }
 

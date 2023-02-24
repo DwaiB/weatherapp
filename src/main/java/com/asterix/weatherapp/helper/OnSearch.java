@@ -1,5 +1,6 @@
 package com.asterix.weatherapp.helper;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.asterix.weatherapp.dto.Location;
@@ -8,7 +9,7 @@ public class OnSearch {
     private List<Location> location;
     public OnSearch() {}
     public OnSearch(Location[] locations) {
-        // TODO: handle Search json
+        this.location = Arrays.asList(locations);
     }
     public List<Location> getLocation() {
         return location;

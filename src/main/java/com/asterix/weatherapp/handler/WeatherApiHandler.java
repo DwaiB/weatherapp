@@ -20,7 +20,7 @@ public class WeatherApiHandler {
     
     public OnForecast getForecast(String city, int days){
         String response = api.forecast(city, days);
-        OnForecast result = new OnForecast(response);
+        OnForecast result = parser.parseOnForecastJson(response);
         return result;
     }
     public OnSearch getSearch(String city){
